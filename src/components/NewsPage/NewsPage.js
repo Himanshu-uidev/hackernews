@@ -19,7 +19,7 @@ const newspage = props => { // component rendering the news list
           let dt2 = new Date();
           let diff = props.diffCalculator(dt1, dt2);
           let diffDays = Math.round(diff/(24*60))
-          
+          console.log("==update");
         return (
           <div className={styles.mainStyle} key={data.objectID}>
             <div className={styles.numberList}>
