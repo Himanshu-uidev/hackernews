@@ -13,12 +13,12 @@ export class HomePage extends Component {
     voteArray: localStorage.getItem("voteArray")
       ? JSON.parse(localStorage.getItem("voteArray"))
       : [],
-    error : false,
-    errormessage : "Error Loading data ..."
+    error: false,
+    errormessage: "Error Loading data ..."
   };
 
-  componentDidMount() { // api call to get data for hacker news
-   
+  componentDidMount() {
+    // api call to get data for hacker news
     httpInstance
       .get("search?tags=front_page")
       .then(response => {
@@ -26,32 +26,34 @@ export class HomePage extends Component {
         this.setState({ data: response });
       })
       .catch(error => {
-         this.setState({ error: true })
+        this.setState({ error: true });
       });
   }
 
-  diffCalculator = (dt2, dt1) => { // function to calculate time difference
-    let diffmin =(dt2.getTime() - dt1.getTime()) / 1000;
-     diffmin /= 60;
+  diffCalculator = (dt2, dt1) => {
+    // function to calculate time difference
+    let diffmin = (dt2.getTime() - dt1.getTime()) / 1000;
+    diffmin /= 60;
     return Math.abs(Math.round(diffmin));
-    
-   }
+  };
 
-  pageChange = () => { // function to load next page news list
+  pageChange = () => {
+    // function to load next page news list
     const currentpage = this.state.currentPage + 1;
     this.setState({ currentPage: currentpage });
     httpInstance
       .get("search?page=" + currentpage)
       .then(response => {
-        console.log(response);
+        //console.log(response);
         this.setState({ data: response });
       })
       .catch(error => {
-         this.setState({ error: true })
+        this.setState({ error: true });
       });
   };
 
-  hideRow = val => { //  function to hide news list
+  hideRow = val => {
+    //  function to hide news list
     let item = this.state.data.data.hits;
     console.log(item, val);
     const deleteItem = item.filter(data => {
@@ -64,14 +66,16 @@ export class HomePage extends Component {
     this.setState({ data: items });
   };
 
-  vote = val => { // function setting the vote object ID in local storage
+  vote = val => {
+    // function setting the vote object ID in local storage
     let voteitem = this.state.voteArray;
     voteitem.push(val);
     this.setState({ voteArray: voteitem });
     localStorage.setItem("voteArray", JSON.stringify(voteitem));
   };
 
-  upvote = val => { // function filtering the object ID and updating in local storage
+  upvote = val => {
+    // function filtering the object ID and updating in local storage
     let voteitem = this.state.voteArray;
     const upvoteItem = voteitem.filter(upvo => upvo !== val);
     this.setState({ voteArray: upvoteItem });
@@ -82,19 +86,27 @@ export class HomePage extends Component {
       <>
         <div className={styles.outerDiv}>
           <Header />
-          {!this.state.error ?
-          (<><NewsPage
-            upvote={this.upvote}
-            voteItem={this.state.voteArray}
-            data={this.state.data.data}
-            vote={this.vote}
-            index={this.state.currentPage}
-            hideRow={this.hideRow}
-            diffCalculator={this.diffCalculator}
-          />
-          <SeeMore pageChange={this.pageChange} /></>):(<center><div className={styles.errorMessage}><h2>{this.state.errormessage}</h2></div></center>)}
+          {!this.state.error ? (
+            <>
+              <NewsPage
+                upvote={this.upvote}
+                voteItem={this.state.voteArray}
+                data={this.state.data.data}
+                vote={this.vote}
+                index={this.state.currentPage}
+                hideRow={this.hideRow}
+                diffCalculator={this.diffCalculator}
+              />
+              <SeeMore pageChange={this.pageChange} />
+            </>
+          ) : (
+            <center>
+              <div className={styles.errorMessage}>
+                <h2>{this.state.errormessage}</h2>
+              </div>
+            </center>
+          )}
 
-          
           <div className={styles.footerDiv}></div>
 
           <br />

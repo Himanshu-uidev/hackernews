@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./Header.module.css";
 
-function FrontPage() { // component rendering the header on the page
+function FrontPage() {
+  // component rendering the header on the page
   return (
     <>
       <ul className={styles.mainDiv}>

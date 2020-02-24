@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const instance = axios.create({
+const httpInstance = axios.create({
     baseURL: 'http://hn.algolia.com/api/v1/'
 });
 
-export default instance;
+export default httpInstance;
