@@ -7,7 +7,7 @@ const newspage = props => { // component rendering the news list
     //console.log("===hits", props.index, props.data.hits);
     const hits = props.data.hits;
     NewsList = hits.map((data, i) => {
-      if (data.title && data.url && data.created_at) {
+      if ( data.url && data.created_at) {
        // console.log("=== i", i)
         let url = data.url;
         let domain = url
@@ -19,7 +19,7 @@ const newspage = props => { // component rendering the news list
           let dt2 = new Date();
           let diff = props.diffCalculator(dt1, dt2);
           let diffDays = Math.round(diff/(24*60));
-          
+
         return (
           <div className={styles.mainStyle} key={data.objectID}>
             <div className={styles.numberList}>

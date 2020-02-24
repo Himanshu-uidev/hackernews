@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NewsPage from "../../components/NewsPage/NewsPage";
 import httpInstance from "../../axios";
-import FrontPage from "../../components/FrontPage/FrontPage";
+import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "./HomePage.module.css";
 import SeeMore from "../../components/SeeMore/SeeMore";
@@ -81,7 +81,7 @@ export class HomePage extends Component {
     return (
       <>
         <div className={styles.outerDiv}>
-          <FrontPage />
+          <Header />
           {!this.state.error ?
           (<><NewsPage
             upvote={this.upvote}

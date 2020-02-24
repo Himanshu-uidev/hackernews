@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./FrontPage.module.css";
+import styles from "./Header.module.css";
 
 function FrontPage() { // component rendering the header on the page
   return (
