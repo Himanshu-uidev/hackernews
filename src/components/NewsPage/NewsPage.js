@@ -8,7 +8,7 @@ const newspage = props => {
     //console.log("===hits", props.index, props.data.hits);
     const hits = props.data.hits;
     NewsList = hits.map((data, i) => {
-      if (data.title && data.url && data.created_at) {
+      if ( data.url && data.created_at) {
         // console.log("=== i", i)
         let url = data.url;
         let domain = url
@@ -55,11 +55,14 @@ const newspage = props => {
                 {data.points} points By {data.author} {" | "}{" "}
                 {data.num_comments} comments {"| "} {diffDays} hours ago
               </div>
+             
               <div
                 className={styles.hideDiv}
                 onClick={() => props.hideRow(data.objectID)}
               >
-                <button className={styles.seeMoreBtn}>| hide | </button>
+                <a href="#hide" className={styles.linkColor}>
+                  | hide |
+                </a>
               </div>
             </div>
           </div>

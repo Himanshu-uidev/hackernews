@@ -44,7 +44,7 @@ export class HomePage extends Component {
     httpInstance
       .get("search?page=" + currentpage)
       .then(response => {
-        //console.log(response);
+        console.log(response);
         this.setState({ data: response });
       })
       .catch(error => {
@@ -55,14 +55,17 @@ export class HomePage extends Component {
   hideRow = val => {
     //  function to hide news list
     let item = this.state.data.data.hits;
-    console.log(item, val);
+    console.log("===val", val);
     const deleteItem = item.filter(data => {
-      console.log(data.objectID, val);
+      //console.log(data.objectID, val);
       return data.objectID !== val;
+     
     });
     let items = this.state.data;
     items.data.hits = deleteItem;
-    console.log(deleteItem, items.data.hits, items);
+    console.log("==deleteItem",deleteItem);
+    console.log("===items.data.hits", items.data.hits);
+    console.log("===items", items);
     this.setState({ data: items });
   };
 
